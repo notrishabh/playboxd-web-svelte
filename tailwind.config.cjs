@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
             'main': ['Poppins'],
+            'subText': ['Assistant', 'Marcellus'],
     }
   },
   plugins: [],
