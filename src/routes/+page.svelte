@@ -1,10 +1,11 @@
-<script lang="ts">
+<script lang="ts" async>
   import GameRectangle from "$lib/GameRectangle.svelte";
-  import Navbar from "$lib/Navbar.svelte";
+  import Navbar from "$lib/navbar.svelte";
   import IoLogoGameControllerB from "svelte-icons/io/IoLogoGameControllerB.svelte";
+  import type { PageData } from "./$types";
 
-  export let data;
-  console.log(data);
+  export let data : PageData;
+  const {list} = data;
 
   const bannerSrc =
     "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
@@ -12,7 +13,7 @@
 
 <div>
   <Navbar />
-  <div class="banner" />
+  <div class="banner" style="--bannerSrc: url({bannerSrc});" />
   <div
     class="relative backdrop-blur-sm bottom-20 flex flex-col justify-center items-center 
         w-full"
@@ -35,23 +36,16 @@
       </div>
     </div>
   </div>
-  <div class="flex content-center justify-evenly mx-2">
-    <GameRectangle />
-    <GameRectangle />
-    <GameRectangle />
-    <GameRectangle />
-    <GameRectangle />
-    <GameRectangle />
-  </div>
-  <div class="relative inline-block">
-    <div class="w-40 h-40 hover:bg-gradient-to-b from-teal-500 to-purple-900  rounded-lg bg-teal-500 transition-all duration-300 ease-in-out cursor-pointer overflow-hidden">
-      <div class="absolutebottom-0 left-0 p-4 text-white transition-all duration-300 ease-in-out w-full">
-        <p class="text-lg font-medium">Your content goes here</p>
-        <p class="text-sm">Lorem ipsum dolor sit amet</p>
-      </div>
+  {#if !data}
+    <p>loading</p>
+  {:else}
+    <div class="flex content-center justify-evenly mx-2">
+      {#each list.results as game}
+        <GameRectangle data={game} />
+      {/each}
     </div>
-  </div>
-   
+
+  {/if}
 
 </div>
 
@@ -62,7 +56,7 @@
         rgba(40, 42, 45, 0.6),
         rgba(0, 0, 0, 0)
       ),
-      url("https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+      var(--bannerSrc);
     width: 100%;
     aspect-ratio: 1/0.4;
     background-repeat: no-repeat;
