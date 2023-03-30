@@ -1,21 +1,38 @@
 <script lang="ts">
-  export let data;
+  export let data: any;
+  export let width: string = "44";
+  export let height: string = "60";
+  export let showName: boolean = true;
+  export let hoverBorder: boolean = true;
+
   let bgImage = data?.background_image || data?.genres[0].image_background;
+
+  const handleClick = () => {
+    window.location.href = `/gameinfo/${data.id}`;
+  };
 </script>
 
-<div class="rounded-lg w-44 h-60 border border-transparent ">
+<div
+  class={`rounded-lg w-${width} h-${height} border border-transparent shadow-lg`}
+>
   {#if data}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
-      class="h-full relative text-white border-2 border-transparent rounded-md hover:border-green-500 hover:cursor-pointer "
+      on:click={handleClick}
+      data-sveltekit-preload-data
+      class="h-full relative text-white border-2 border-transparent rounded-md hover:cursor-pointer"
+      class:hover:border-green-500={hoverBorder}
     >
       <img
         src={bgImage}
         class="h-full w-full object-cover rounded-md"
         alt={data.name}
       />
-      <div class="absolute inset-0 flex items-end justify-center mb-5 ">
-        <p class="text-shadow">{data?.name}</p>
-      </div>
+      {#if showName}
+        <div class="absolute inset-0 flex items-end justify-center mb-5 mx-3 font-subText ">
+          <p class="text-shadow">{data?.name}</p>
+        </div>
+      {/if}
     </div>
   {:else}
     <p>loading</p>
