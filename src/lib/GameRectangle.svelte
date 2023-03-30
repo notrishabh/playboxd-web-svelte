@@ -1,7 +1,5 @@
 <script lang="ts">
   export let data: any;
-  export let width: string = "44";
-  export let height: string = "60";
   export let showName: boolean = true;
   export let hoverBorder: boolean = true;
 
@@ -13,7 +11,7 @@
 </script>
 
 <div
-  class={`rounded-lg w-${width} h-${height} border border-transparent shadow-lg`}
+  class={`rounded-lg w-full h-full border border-transparent shadow-lg`}
 >
   {#if data}
     <!-- svelte-ignore a11y-click-events-have-key-events -->

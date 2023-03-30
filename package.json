@@ -24,7 +24,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^3.5.1",
 		"dotenv": "^16.0.3",
+		"svelte-charts": "^0.0.1",
 		"svelte-icons": "^2.1.0"
 	}
 }

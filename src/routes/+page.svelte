@@ -41,7 +41,9 @@
   {:else}
     <div class="flex content-center justify-evenly mx-2">
       {#each list.results as game}
+      <div class="w-44 h-60">
         <GameRectangle data={game} />
+      </div>
       {/each}
     </div>
 
