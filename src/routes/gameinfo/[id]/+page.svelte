@@ -1,65 +1,21 @@
 <script lang="ts">
   import GameRectangle from "$lib/GameRectangle.svelte";
+  import MetacriticCounter from "$lib/MetacriticCounter.svelte";
+  import RatingsChart from "$lib/RatingsChart.svelte";
   import { sliceString } from "$lib/utils";
-  import { onMount } from "svelte";
-  import Chart from "chart.js/auto";
-
-  // Define the data for the bar graph
-  const bars = [10, 20, 30, 40, 50];
-
-  let chart;
-
-  onMount(() => {
-    const canvas = document.getElementById("myChart");
-    const ctx = canvas?.getContext("2d");
-
-    // Create the chart
-    chart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["1", "2", "3", "4", "5"],
-        datasets: [
-          {
-            label: "",
-            data: bars,
-            backgroundColor: "#9CA3AF",
-            borderRadius: 4
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            ticks: {
-              display: false,
-            },
-            grid: {
-              display: false
-            }
-          },
-          y: {
-            ticks: {
-              display: false,
-            },
-            grid: {
-              display: false
-            }
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    });
-  });
+  import IoMdStar from "svelte-icons/io/IoMdStar.svelte";
 
   export let data: any;
   const { gameInfo } = data;
   console.log(gameInfo);
+
+  let bars: number[] = [];
+
+  gameInfo?.ratings.map((rating: any) => {
+    bars.push(rating.count);
+  });
+
+  bars = bars.reverse();
 
   const bannerSrc =
     gameInfo?.background_image_additional ||
@@ -75,19 +31,66 @@
     </div>
   </div>
   <div class="flex flex-col items-start">
-    <h1
-      class="text-center leading-snug text-gray-200 font-bold font-main text-4xl"
-    >
-      {gameInfo?.name}
-    </h1>
+    <div class="flex justify-center items-center gap-3">
+      <h1
+        class="text-center leading-snug text-gray-200 font-bold font-main text-3xl"
+      >
+        {gameInfo?.name}
+      </h1>
+      <div class="text-md leading-snug">
+        <span class="font-thin text-gray-400">Published by</span>
+        <a
+          href="/"
+          class="text-gray-300 font-bold underline decoration-solid hover:text-blue-300"
+          >{gameInfo?.publishers[0]?.name}</a
+        >
+      </div>
+    </div>
     <div class="flex gap-10">
       <div class="text-gray-400">
         {@html sliceString(gameInfo?.description, 3)}
       </div>
-      <div class="">
-        <!-- {ratings} -->
-        <canvas id="myChart" />
+      <div class="h-32 w-1/3">
+        <div
+          class="flex justify-between font-main items-center font-extralight"
+        >
+          <span class="text-gray-400 ">RATINGS</span>
+          <span class="text-xs text-gray-500"
+            >{gameInfo?.ratings_count} FANS</span
+          >
+        </div>
+        <div class="border-t-2 border-gray-400 mb-10 w-full" />
+        <div class="flex items-end">
+          <div class="w-3 text-green-500 mr-1 mb-1">
+            <IoMdStar />
+          </div>
+          <div class="h-16 w-3/5">
+            <RatingsChart {bars} />
+          </div>
+          <div
+            class="ml-2 mb-1 flex flex-col justify-center items-center gap-3"
+          >
+            <p class="text-gray-400 text-2xl leading-snug">
+              {gameInfo?.rating}
+            </p>
+            <div class="flex">
+              {#each Array(5)
+                .fill("")
+                .map((_, i) => i) as i}
+                <div class="w-3 text-green-500">
+                  <IoMdStar />
+                </div>
+              {/each}
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="flex gap-5">
+      <MetacriticCounter
+        rating={gameInfo?.metacritic}
+        url={gameInfo?.metacritic_url}
+      />
     </div>
   </div>
 </div>

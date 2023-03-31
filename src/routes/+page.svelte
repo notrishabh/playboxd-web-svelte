@@ -12,7 +12,6 @@
 </script>
 
 <div>
-  <Navbar />
   <div class="banner" style="--bannerSrc: url({bannerSrc});" />
   <div
     class="relative backdrop-blur-sm bottom-20 flex flex-col justify-center items-center 
