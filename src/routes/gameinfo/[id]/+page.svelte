@@ -2,6 +2,8 @@
   import GameRectangle from "$lib/GameRectangle.svelte";
   import MetacriticCounter from "$lib/MetacriticCounter.svelte";
   import RatingsChart from "$lib/RatingsChart.svelte";
+  import RedditDiv from "$lib/RedditDiv.svelte";
+  import WebsiteBtn from "$lib/WebsiteBtn.svelte";
   import { sliceString } from "$lib/utils";
   import IoMdStar from "svelte-icons/io/IoMdStar.svelte";
 
@@ -47,7 +49,7 @@
       </div>
     </div>
     <div class="flex gap-10">
-      <div class="text-gray-400">
+      <div class="text-gray-400 mb-3">
         {@html sliceString(gameInfo?.description, 3)}
       </div>
       <div class="h-32 w-1/3">
@@ -86,11 +88,17 @@
         </div>
       </div>
     </div>
-    <div class="flex gap-5">
+    <div class="flex gap-5 ">
       <MetacriticCounter
         rating={gameInfo?.metacritic}
         url={gameInfo?.metacritic_url}
       />
+      <RedditDiv
+        url={gameInfo?.reddit_url}
+        subreddit={gameInfo?.reddit_name}
+        logo={gameInfo?.reddit_logo}
+      />
+      <WebsiteBtn url={gameInfo?.website} />
     </div>
   </div>
 </div>
