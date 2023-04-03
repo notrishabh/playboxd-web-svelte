@@ -1,15 +1,9 @@
 <script lang="ts">
     import SearchBar from "./SearchBar.svelte";
     let searchTerm: string = "";
-    const handleInput = (value: any) => {
-        console.log(value);
-        if (value?.data) {
-            searchTerm += value?.data;
-        }
-    };
     const handleSubmit = () => {
         console.log("Search term:", searchTerm);
-        // Perform search action
+        window.location.href = `/search/${searchTerm}`;
     };
 </script>
 
@@ -23,12 +17,9 @@
             <a href="/">lists</a>
             <a href="/">sign in</a>
             <div class="w-48">
-                <SearchBar
-                    value={searchTerm}
-                    onInput={handleInput}
-                    onSubmit={handleSubmit}
-                />
+                <SearchBar bind:val={searchTerm} onSubmit={handleSubmit} />
             </div>
         </div>
     </ul>
 </div>
+
