@@ -3,16 +3,17 @@
   export let showName: boolean = true;
   export let hoverBorder: boolean = true;
 
-  let bgImage = data?.background_image || data?.genres[0].image_background;
+  let bgImage =
+    data?.background_image ||
+    data?.genres[0]?.image_background ||
+    "https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
 
   const handleClick = () => {
     window.location.href = `/gameinfo/${data.id}`;
   };
 </script>
 
-<div
-  class={`rounded-lg w-full h-full border border-transparent shadow-lg`}
->
+<div class={`rounded-lg w-full h-full border border-transparent shadow-lg`}>
   {#if data}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
@@ -27,7 +28,9 @@
         alt={data.name}
       />
       {#if showName}
-        <div class="absolute inset-0 flex items-end justify-center mb-5 mx-3 font-subText ">
+        <div
+          class="absolute inset-0 flex items-end justify-center mb-5 mx-3 font-subText "
+        >
           <p class="text-shadow">{data?.name}</p>
         </div>
       {/if}
