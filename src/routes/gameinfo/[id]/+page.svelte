@@ -26,7 +26,8 @@
 </script>
 
 <div class="banner" style="--bannerSrc: url({bannerSrc});" />
-<div class="flex gap-10">
+<div class="mask" />
+<div class="flex gap-10 backdrop-blur-sm bottom-5 relative ">
   <div>
     <div class="w-52 h-72">
       <GameRectangle data={gameInfo} showName={false} hoverBorder={false} />
@@ -105,15 +106,10 @@
 
 <style>
   .banner {
-    background-image: linear-gradient(
-        45deg,
-        rgba(40, 42, 45, 0.6),
-        rgba(0, 0, 0, 0)
-      ),
-      var(--bannerSrc);
     width: 100%;
     aspect-ratio: 1/0.4;
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: var(--bannerSrc);
   }
 </style>

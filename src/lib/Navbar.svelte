@@ -7,7 +7,7 @@
     };
 </script>
 
-<div class="p-3 top-0 w-full float-left backdrop-blur-sm mb-5 ">
+<div class="p-3 px-20 top-0 w-full float-left backdrop-blur-sm mb-5 ">
     <ul
         class="bg-transparent list-none flex justify-between items-center text-gray-100 font-main font-bold text-lg mx-5"
     >

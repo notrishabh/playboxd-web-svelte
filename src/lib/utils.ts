@@ -15,3 +15,8 @@ export const sliceString = (str: string, fullStops: number) => {
   // Otherwise, slice the string up to the fifth full stop
   return str.slice(0, index + 1);
 };
+
+export const randomBanner = (items: Array<string>): string => {
+  let item: string = items[Math.floor(Math.random() * items.length)];
+  return item;
+};

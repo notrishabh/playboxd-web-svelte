@@ -7,6 +7,12 @@
     logo =
       "https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-60x60.png";
   }
+  if (subreddit == "") {
+    subreddit = "Not Found";
+  }
+  if (url == "") {
+    url = "https://www.reddit.com";
+  }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
