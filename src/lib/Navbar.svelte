@@ -15,7 +15,7 @@
         <div class="flex gap-10">
             <a href="/">games</a>
             <a href="/">lists</a>
-            <a href="/">sign in</a>
+            <a href="/register">sign in</a>
             <div class="w-48">
                 <SearchBar bind:val={searchTerm} onSubmit={handleSubmit} />
             </div>
