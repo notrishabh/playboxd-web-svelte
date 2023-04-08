@@ -2,21 +2,12 @@
   import type { ActionData } from "./$types";
 
   export let form: ActionData;
-
-  function handleSubmit(): any {
-    console.log("xddd");
-  }
 </script>
 
 <div class="text-gray-400">
   <h1 class="">Register</h1>
 
-  <form
-    action="?/register"
-    method="POST"
-    class="border border-blue-500 p-10"
-    on:submit={handleSubmit}
-  >
+  <form action="?/register" method="POST" class="border border-blue-500 p-10">
     <div>
       <label for="username" class="m-5">Username</label>
       <input id="username" name="username" type="text" required class="m-5" />
