@@ -1,11 +1,16 @@
 import { db } from "$lib/database";
 import { fail, redirect } from "@sveltejs/kit";
-import type { Action, Actions } from "../$types";
+import type { Action, Actions, PageServerLoad } from "../$types";
 import bcrypt from 'bcrypt'
 
 enum Roles {
   ADMIN = 'ADMIN',
   USER = 'USER'
+}
+
+export const load: PageServerLoad = async (event) => {
+  console.log(event)
+
 }
 
 const register: Action = async ({ request }) => {
