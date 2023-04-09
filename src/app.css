@@ -8,6 +8,7 @@ body{
     display: flex;
     justify-content: center;
     overflow: overlay;
+    color: #9ca3af
 }
 
 /* Firefox */
