@@ -8,9 +8,10 @@ enum Roles {
   USER = 'USER'
 }
 
-export const load: PageServerLoad = async (event) => {
-  console.log(event)
-
+export const load: PageServerLoad = async ({ locals }) => {
+  if (locals.user) {
+    throw redirect(302, "/")
+  }
 }
 
 const register: Action = async ({ request }) => {

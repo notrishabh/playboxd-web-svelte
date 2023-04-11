@@ -1,8 +1,13 @@
 import { db } from "$lib/database";
 import { fail, redirect } from "@sveltejs/kit";
-import type { Action, Actions } from "../$types";
+import type { Action, Actions, PageServerLoad } from "../$types";
 import bcrypt from 'bcrypt';
 
+export const load: PageServerLoad = async ({ locals }) => {
+  if (locals.user) {
+    throw redirect(302, "/")
+  }
+}
 
 const login: Action = async ({ cookies, request }) => {
   const data = await request.formData();

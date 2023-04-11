@@ -27,7 +27,7 @@
         class="bg-transparent list-none flex justify-between items-center text-gray-100 font-main font-bold text-md mx-5"
     >
         <a href="/"><img src="/logo.png" alt="logo" class="w-full h-16" /></a>
-        <div class="flex gap-10">
+        <div class="flex gap-10 items-center">
             <a href="/">games</a>
             <a href="/">lists</a>
             {#if !$page.data.user}
@@ -38,7 +38,9 @@
                     on:mouseenter={toggleDropdown}
                     on:mouseleave={toggleDropdown}
                 >
-                    <div class="flex justify-center items-start cursor-pointer">
+                    <div
+                        class="flex justify-center items-start cursor-pointer m-1"
+                    >
                         <div class="w-6 mr-1"><IoMdContact /></div>
                         {$page.data.user.name}
                         <div class="w-4 ml-1 self-center">
@@ -48,7 +50,7 @@
                     {#if dropdownFlag}
                         <div class="border-t-2 border-gray-700 mt-1 w-full" />
                         <ul
-                            class="absolute w-full bg-gray-500 bg-transparent z-50 font-thin text-xs py-2"
+                            class="absolute min-w-fit w-full bg-gray-500 z-50 font-thin text-xs py-2 bg-opacity-90"
                         >
                             <li>
                                 <a
