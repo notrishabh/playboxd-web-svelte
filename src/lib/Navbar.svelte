@@ -11,12 +11,18 @@
         console.log("Search term:", searchTerm);
         window.location.href = `/search/${searchTerm}`;
     };
-    const toggleDropdown = () => {
-        dropdownFlag = !dropdownFlag;
+    const toggleDropdown = (e: any) => {
+        dropdownFlag = true;
+        //Persist the dropdown for 3 second before hiding
+        if (e.type === "mouseleave") {
+            setTimeout(() => {
+                dropdownFlag = false;
+            }, 2000);
+        }
     };
 </script>
 
-<div class="p-3 px-20 top-0 w-full float-left backdrop-blur-sm mb-5">
+<div class="p-3 px-20 top-0 w-full float-left backdrop-blur-sm mb-5 uppercase">
     <ul
         class="bg-transparent list-none flex justify-between items-center text-gray-100 font-main font-bold text-md mx-5"
     >
@@ -28,29 +34,31 @@
                 <a href="/register">sign in</a>
             {:else}
                 <div
+                    class={`relative ${dropdownFlag ? "bg-gray-500" : ""} `}
                     on:mouseenter={toggleDropdown}
                     on:mouseleave={toggleDropdown}
                 >
                     <div class="flex justify-center items-start cursor-pointer">
-                        <div class="w-7 mr-1"><IoMdContact /></div>
+                        <div class="w-6 mr-1"><IoMdContact /></div>
                         {$page.data.user.name}
                         <div class="w-4 ml-1 self-center">
                             <IoIosArrowDown />
                         </div>
                     </div>
                     {#if dropdownFlag}
+                        <div class="border-t-2 border-gray-700 mt-1 w-full" />
                         <ul
-                            class="absolute w-48 bg-transparent border border-gray-300 rounded-md z-50"
+                            class="absolute w-full bg-gray-500 bg-transparent z-50 font-thin text-xs py-2"
                         >
                             <li>
                                 <a
                                     href="/profile"
-                                    class="block px-4 py-2 text-gray-700"
+                                    class="block px-4 py-2 text-gray-100 hover:bg-gray-600"
                                     >Profile</a
                                 >
                             </li>
                             <li
-                                class="block px-4 py-2 text-gray-700 cursor-pointer"
+                                class="block px-4 py-2 text-gray-100 cursor-pointer hover:bg-gray-600"
                             >
                                 Logout
                             </li>
@@ -58,7 +66,7 @@
                     {/if}
                 </div>
             {/if}
-            <div class="w-48">
+            <div class="w-44">
                 <SearchBar bind:val={searchTerm} onSubmit={handleSubmit} />
             </div>
         </div>
