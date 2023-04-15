@@ -2,7 +2,6 @@
   import GameRectangle from "./GameRectangle.svelte";
   import GenreShow from "./GenreShow.svelte";
   export let data: any;
-  console.log("searched", data);
 </script>
 
 <div class="flex gap-8 ">

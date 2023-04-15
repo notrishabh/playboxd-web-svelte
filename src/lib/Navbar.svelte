@@ -3,12 +3,13 @@
     import SearchBar from "./SearchBar.svelte";
     import IoMdContact from "svelte-icons/io/IoMdContact.svelte";
     import IoIosArrowDown from "svelte-icons/io/IoIosArrowDown.svelte";
+    import { applyAction, enhance } from "$app/forms";
+    import { invalidateAll } from "$app/navigation";
 
     let searchTerm: string = "";
     let dropdownFlag: boolean = false;
 
     const handleSubmit = () => {
-        console.log("Search term:", searchTerm);
         window.location.href = `/search/${searchTerm}`;
     };
     const toggleDropdown = (e: any) => {
@@ -34,7 +35,7 @@
                 <a href="/register">sign in</a>
             {:else}
                 <div
-                    class={`relative ${dropdownFlag ? "bg-gray-500" : ""} `}
+                    class={`relative ${dropdownFlag ? "bg-gray-400" : ""} `}
                     on:mouseenter={toggleDropdown}
                     on:mouseleave={toggleDropdown}
                 >
@@ -50,19 +51,25 @@
                     {#if dropdownFlag}
                         <div class="border-t-2 border-gray-700 mt-1 w-full" />
                         <ul
-                            class="absolute min-w-fit w-full bg-gray-500 z-50 font-thin text-xs py-2 bg-opacity-90"
+                            class="absolute min-w-fit w-full bg-gray-400 z-50 font-thin text-xs py-1 bg-opacity-90"
                         >
                             <li>
                                 <a
                                     href="/profile"
-                                    class="block px-4 py-2 text-gray-100 hover:bg-gray-600"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-600 hover:text-gray-200"
                                     >Profile</a
                                 >
                             </li>
                             <li
-                                class="block px-4 py-2 text-gray-100 cursor-pointer hover:bg-gray-600"
+                                class="block px-4 py-2 text-gray-800 cursor-pointer hover:bg-gray-600 hover:text-gray-200"
                             >
-                                Logout
+                                <form
+                                    action="/logout"
+                                    method="POST"
+                                    use:enhance
+                                >
+                                    <button type="submit">LOGOUT</button>
+                                </form>
                             </li>
                         </ul>
                     {/if}

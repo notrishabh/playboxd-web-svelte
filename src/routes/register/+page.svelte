@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ActionData } from "./$types";
-  import { enhance } from "$app/forms";
+  import { applyAction, enhance } from "$app/forms";
+  import { invalidateAll } from "$app/navigation";
 
   export let form: ActionData;
 </script>
@@ -37,5 +38,6 @@
     <button type="submit" class="bg-green-200 p-2 text-black m-5"
       >Register</button
     >
+    <a href="/login" class="bg-green-200 p-2 text-black m-5">Login</a>
   </form>
 </div>
